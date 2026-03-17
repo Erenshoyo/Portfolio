@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  :root[data-theme="figmaDark"] {
+    --bg-grad-start: #11140B;
+    --bg-grad-end: #000000;
+  }
+
+  :root[data-theme="figmaLight"] {
+    --bg-grad-start: #FAFAF6;
+    --bg-grad-end: #EDE9DE;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(180deg, var(--bg-grad-start) 0%, var(--bg-grad-end) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}
