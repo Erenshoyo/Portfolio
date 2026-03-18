@@ -139,8 +139,12 @@ export default function Hero() {
               <div className="w-full h-full rounded-full bg-base-200 shadow-2xl overflow-hidden flex items-center justify-center relative border border-base-content/5 group">
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent pointer-events-none z-10 transition-opacity duration-500 group-hover:opacity-0"></div>
                 <img
-                  src="/profile.png"
+                  src="/profile.webp"
                   alt={personalInfo.name}
+                  width="384"
+                  height="384"
+                  fetchPriority="high"
+                  decoding="async"
                   className="w-full h-full object-cover object-center relative z-0 transition-all duration-700 ease-out group-hover:scale-105"
                 />
               </div>
