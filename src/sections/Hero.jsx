@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { isConfiguredLink, personalInfo } from "../data/portfolioData";
 
 export default function Hero() {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -34,7 +37,7 @@ export default function Hero() {
             className="flex-1 text-center md:text-left"
             variants={containerVariants}
             initial="hidden"
-            animate="visible"
+            animate={isImageLoaded ? "visible" : "hidden"}
           >
             {/* Minimalist Intro Tag */}
             <motion.div variants={itemVariants} className="mb-6">
@@ -128,7 +131,7 @@ export default function Hero() {
           <motion.div
             className="flex-1 flex justify-center md:justify-end w-full"
             initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            animate={isImageLoaded ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="relative w-72 h-72 md:w-96 md:h-96">
@@ -145,6 +148,7 @@ export default function Hero() {
                   height="384"
                   fetchPriority="high"
                   decoding="async"
+                  onLoad={() => setIsImageLoaded(true)}
                   className="w-full h-full object-cover object-center relative z-0 transition-all duration-700 ease-out group-hover:scale-105"
                 />
               </div>
