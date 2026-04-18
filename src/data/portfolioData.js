@@ -113,8 +113,6 @@ export const involvementData = [
     duration: "March 2026 - Present",
     points: [
       "Collaborated with a team of students to design and develop the official club flagship event landing page.",
-      "Conducted beginner-friendly workshops on HTML, CSS, and introductory React concepts.",
-      "Optimized the club website's loading speed and ensured full cross-browser compatibility.",
     ],
   },
 ];
@@ -122,6 +120,24 @@ export const involvementData = [
 export const projectsData = [
   {
     id: 1,
+    title: "LifeOS Productivity Suite",
+    description:
+      "A premium, offline-first productivity platform that unifies tasks, habits, journaling, and deep-focus tools into a single intentional system.",
+    techStack: [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Three.js",
+      "TypeScript",
+    ],
+    liveLink: "https://lifeos-es.netlify.app",
+    githubLink: "https://github.com/Erenshoyo/LifeOS",
+    featured: true,
+    image: "/projects/lifeos.png",
+  },
+  {
+    id: 2,
     title: "PulseCity Event Explorer",
     description:
       "A smart web app for discovering events, viewing details, and creating local booking records. Features Firebase authentication, protected routes, and elegant UI components.",
@@ -139,7 +155,7 @@ export const projectsData = [
     image: "/projects/pulse.png",
   },
   {
-    id: 2,
+    id: 3,
     title: "Phudu Medical Booking",
     description:
       "A healthcare platform connecting patients with medical professionals. Users can browse doctor profiles, check real-time availability, and manage appointments with local storage persistence.",
@@ -155,21 +171,5 @@ export const projectsData = [
     featured: true,
     image: "/projects/phudu.png",
   },
-  {
-    id: 3,
-    title: "Dragon News Portal",
-    description:
-      "A dynamic, responsive React-based news portal that delivers categorized news content. It features comprehensive social login options, trending news marquees, and secure private routing.",
-    techStack: [
-      "React",
-      "Firebase Auth",
-      "Tailwind CSS",
-      "DaisyUI",
-      "React Router",
-    ],
-    liveLink: "https://dragon-news-site-241.web.app",
-    githubLink: "https://github.com/Erenshoyo/Dragon-news-practice-project",
-    featured: false,
-    image: "/projects/dragon.png",
-  },
+  
 ];
