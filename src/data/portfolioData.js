@@ -133,6 +133,7 @@ export const projectsData = [
     ],
     liveLink: "https://lifeos-es.netlify.app",
     githubLink: "https://github.com/Erenshoyo/LifeOS",
+    status: "in-progress",
     featured: true,
     image: "/projects/lifeos.png",
   },

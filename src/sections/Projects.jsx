@@ -53,6 +53,24 @@ export default function Projects() {
                     </svg>
                   </div>
                 )}
+
+                {project.status === "in-progress" && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 + 0.3 }}
+                    className="absolute top-4 right-4 z-30 flex items-center gap-1.5 px-3 py-1 rounded-full bg-base-100/80 backdrop-blur-md border border-primary/20 shadow-sm"
+                  >
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
+                      In Progress
+                    </span>
+                  </motion.div>
+                )}
               </div>
 
               <div className="p-6 flex-grow flex flex-col relative z-20">
