@@ -44,6 +44,7 @@ export const navLinks = [
   { name: "Home", href: "#home" },
   { name: "Skills", href: "#skills" },
   { name: "Involvement", href: "#involvement" },
+  { name: "Education", href: "#education" },
   { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
 ];
@@ -114,6 +115,27 @@ export const involvementData = [
     points: [
       "Collaborated with a team of students to design and develop the official club flagship event landing page.",
     ],
+  },
+];
+
+export const educationData = [
+  {
+    id: 1,
+    duration: "2023 - Present",
+    degree: "B.Sc. (Engr.) in Computer Science and Engineering",
+    institution: "North South University, Dhaka",
+  },
+  {
+    id: 2,
+    duration: "2019-2021",
+    degree: "Higher Secondary Certificate (HSC)",
+    institution: "Govt. Science College, Tejgaon, Dhaka",
+  },
+  {
+    id: 3,
+    duration: "2017-2019",
+    degree: "Secondary School Certificate (SSC)",
+    institution: "Safiuddin Sarker Academy & College, Tongi, Gazipur",
   },
 ];
 
