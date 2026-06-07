@@ -3,29 +3,31 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Search, Calendar, Clock, ArrowRight } from "lucide-react";
 import { blogPostsData } from "../data/portfolioData";
 
-export default function BlogPage({ setView, setActivePostId }) {
+export default function BlogPage({ blogs, setView, setActivePostId }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState(null);
+
+  const displayBlogs = blogs && blogs.length > 0 ? blogs : blogPostsData;
 
   // Extract all unique tags
   const allTags = useMemo(() => {
     const tags = new Set();
-    blogPostsData.forEach((post) => {
+    displayBlogs.forEach((post) => {
       post.tags.forEach((tag) => tags.add(tag));
     });
     return Array.from(tags);
-  }, []);
+  }, [displayBlogs]);
 
   // Filter blog posts based on search query and selected tag
   const filteredPosts = useMemo(() => {
-    return blogPostsData.filter((post) => {
+    return displayBlogs.filter((post) => {
       const matchesSearch =
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesTag = selectedTag ? post.tags.includes(selectedTag) : true;
       return matchesSearch && matchesTag;
     });
-  }, [searchQuery, selectedTag]);
+  }, [displayBlogs, searchQuery, selectedTag]);
 
   const handlePostClick = (postId) => {
     setActivePostId(postId);

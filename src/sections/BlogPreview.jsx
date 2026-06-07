@@ -2,9 +2,10 @@ import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Clock, Tag } from "lucide-react";
 import { blogPostsData } from "../data/portfolioData";
 
-export default function BlogPreview({ setView, setActivePostId }) {
+export default function BlogPreview({ blogs, setView, setActivePostId }) {
+  const displayBlogs = blogs && blogs.length > 0 ? blogs : blogPostsData;
   // Take the 2 most recent posts for preview
-  const recentPosts = blogPostsData.slice(0, 2);
+  const recentPosts = displayBlogs.slice(0, 2);
 
   const containerVariants = {
     hidden: { opacity: 0 },

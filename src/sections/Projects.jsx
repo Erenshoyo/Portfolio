@@ -2,7 +2,9 @@ import { motion } from "framer-motion";
 import { projectsData } from "../data/portfolioData";
 import { ExternalLink, Github } from "lucide-react";
 
-export default function Projects() {
+export default function Projects({ projects }) {
+  const displayProjects = projects && projects.length > 0 ? projects : projectsData;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -56,7 +58,7 @@ export default function Projects() {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter"
         >
-          {projectsData.map((project) => (
+          {displayProjects.map((project) => (
             <motion.div
               key={project.id}
               variants={itemVariants}

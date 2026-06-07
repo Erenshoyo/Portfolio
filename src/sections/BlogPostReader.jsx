@@ -8,8 +8,9 @@ import {
 } from "lucide-react";
 import { blogPostsData } from "../data/portfolioData";
 
-export default function BlogPostReader({ activePostId, setView }) {
-  const post = blogPostsData.find((p) => p.id === activePostId);
+export default function BlogPostReader({ blogs, activePostId, setView }) {
+  const displayBlogs = blogs && blogs.length > 0 ? blogs : blogPostsData;
+  const post = displayBlogs.find((p) => p.id === activePostId);
 
   if (!post) {
     return (
