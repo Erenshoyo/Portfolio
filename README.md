@@ -1,188 +1,92 @@
 # Asif Shahriar Tauhid Portfolio
 
-Personal portfolio website built with React, Vite, Tailwind CSS, DaisyUI, and Framer Motion.
+Personal portfolio website built with React, Vite, Tailwind CSS, DaisyUI, Framer Motion, and PostgreSQL (via Supabase).
 
-## Overview
+## Tech Stack (PERN)
 
-This project is a single-page portfolio with the following sections:
+- **Frontend**: React 18, Vite 5, Tailwind CSS 3, DaisyUI 4, Framer Motion
+- **Backend/Database**: PostgreSQL hosted on Supabase (accessed securely via `@supabase/supabase-js`)
+- **Icons**: Lucide React + React Icons
 
-- Hero with resume CTA and WhatsApp contact CTA
-- Skills cards grouped by category
-- Involvement timeline
-- Project showcase cards with GitHub and live links
-- Contact section with email draft generation (mailto)
-- Footer with social links
+---
 
-The site supports light and dark themes (`figmaLight` and `figmaDark`) and smooth in-page navigation with active-section highlighting.
+## Features
 
-## Tech Stack
+- **Dynamic Hydration**: Pulls projects and blog posts dynamically from your live PostgreSQL tables on page load, automatically falling back to local static JSON archives in case of fetch errors.
+- **Secret Administrative Panel**: A hidden login console (`#/login`) allowing the owner to authenticate using Supabase Auth.
+- **Interactive CMS Dashboard**: A sleek owner dashboard (`#/dashboard`) supporting:
+  - Compose, update, and delete blog posts using a custom markdown parser.
+  - Create, edit, and delete project items.
+  - Automatically initialize/seed tables with default backup data safely.
+- **Fully Responsive**: Optimizations for mobile, tablet, and desktop views.
+- **Theme Support**: Smooth transition between `figmaLight` and `figmaDark` modes.
 
-- React 18
-- Vite 5
-- Tailwind CSS 3
-- DaisyUI 4
-- Framer Motion
-- Lucide React + React Icons
-- ESLint 9 (flat config)
+---
+
+## Getting Started
+
+### 1. Prerequisites
+
+- Node.js 18+ recommended
+- A free account on [Supabase](https://supabase.com)
+
+### 2. Environment Configurations
+
+Create a `.env` file in the root directory and define the following variables with your Supabase credentials (this file is ignored by git to protect credentials):
+
+```env
+VITE_SUPABASE_URL=YOUR_SUPABASE_PROJECT_URL
+VITE_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_PUBLIC_KEY
+```
+
+### 3. Database Initialization
+
+Execute the SQL script inside `supabase_setup.sql` in the **SQL Editor** of your Supabase Dashboard to create the tables and set up Row Level Security (RLS) policies:
+
+- **Projects Table**: Stores metadata, links, status, and image paths.
+- **Blogs Table**: Stores article text, excerpt summaries, and tags.
+
+### 4. Create Admin Account
+
+Navigate to your Supabase project under **Authentication > Users** and click **Add User > Create User** to set up your admin email and password.
+
+### 5. Running Locally
+
+Install dependencies:
+```bash
+npm install
+```
+
+Run development server:
+```bash
+npm run dev
+```
+
+Build for production:
+```bash
+npm run build
+```
+
+---
 
 ## Project Structure
 
 ```text
 .
-├── public/
-│   ├── Asif Shahriar Tauhid_CVF.pdf
-│   ├── profile.png
-│   └── projects/
+├── public/                # Static assets (images, CV PDF)
 ├── src/
-│   ├── components/
-│   │   ├── Navbar.jsx
-│   │   └── Footer.jsx
-│   ├── data/
-│   │   └── portfolioData.js
-│   ├── hooks/
-│   │   ├── useScrollSpy.js
-│   │   └── useTheme.js
-│   ├── sections/
-│   │   ├── Hero.jsx
-│   │   ├── Skills.jsx
-│   │   ├── Involvement.jsx
-│   │   ├── Projects.jsx
-│   │   └── Contact.jsx
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
+│   ├── components/        # Layout elements (Navbar, Footer)
+│   ├── data/              # Default JSON fallback databases
+│   ├── hooks/             # Theme and scroll controllers
+│   ├── sections/          # Page layouts (Hero, Skills, Projects, Blog, CMS Admin)
+│   ├── utils/             # Supabase client instantiation
+│   ├── App.jsx            # Routing and initialization logic
+│   └── index.css          # Styling system rules
+├── supabase_setup.sql     # Database setup queries
 ├── tailwind.config.js
-├── eslint.config.js
-├── vite.config.js
-├── screenshot.js
-└── download_profile.js
+└── package.json
 ```
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+ recommended
-- npm
-
-### Install
-
-```bash
-npm install
-```
-
-### Run Development Server
-
-```bash
-npm run dev
-```
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
-
-### Lint
-
-```bash
-npm run lint
-```
-
-## Configuration and Customization
-
-### 1) Personal Content
-
-Edit `src/data/portfolioData.js`:
-
-- `personalInfo` for name, email, social links, availability
-- `skillsData` for skills categories/items
-- `involvementData` for timeline entries
-- `projectsData` for project cards
-
-Note: social and calendar links are conditionally shown using `isConfiguredLink()`. Placeholder values (containing `placeholder`) are hidden in the UI.
-
-### 2) Resume File
-
-The Hero resume button links to:
-
-`/Asif%20Shahriar%20Tauhid_CVF.pdf`
-
-If you rename the PDF, update `src/sections/Hero.jsx` accordingly.
-
-### 3) WhatsApp CTA
-
-Hero "Contact Now" uses:
-
-`https://wa.me/8801570234257`
-
-To change number, update the link in `src/sections/Hero.jsx`.
-
-### 4) Theme Colors
-
-Customize theme tokens in `tailwind.config.js` under DaisyUI themes:
-
-- `figmaDark`
-- `figmaLight`
-
-### 5) Global Styles
-
-Global gradient background and base behavior live in `src/index.css`.
-
-## Interaction Model
-
-- Navbar section highlighting uses `useScrollSpy` with a passive scroll listener and `requestAnimationFrame` batching.
-- Theme toggle persists user selection in `localStorage` via `useTheme`.
-- Contact form builds a `mailto:` draft from input fields instead of sending data to a backend API.
-
-## Utility Scripts
-
-### `screenshot.js`
-
-Captures screenshots of project URLs and writes them to `public/projects/` using Puppeteer.
-
-Run manually with:
-
-```bash
-node screenshot.js
-```
-
-### `download_profile.js`
-
-Fetches a hosted image and stores it as `public/profile.png`.
-
-Run manually with:
-
-```bash
-node download_profile.js
-```
-
-## Deployment
-
-This is a static Vite app and can be deployed to:
-
-- Vercel
-- Netlify
-- GitHub Pages
-- Firebase Hosting
-
-Typical deployment flow:
-
-1. Run `npm run build`
-2. Deploy the generated `dist/` directory
-
-## Known Constraints
-
-- Contact form is `mailto`-based, so behavior depends on the visitor's device email client.
-- Calendar card remains in "coming soon" state until a non-placeholder `calendarForm` URL is provided.
-- `src/App.css` is a leftover template stylesheet and is currently unused.
-
-## License
-
-No license file is currently defined in this repository.
+## CMS Console Gates
+- **Login screen**: Accessed via appending `#/login` to the URL.
+- **Dashboard screen**: Accessed via appending `#/dashboard` (only accessible to authenticated administrators).
