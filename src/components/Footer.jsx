@@ -1,70 +1,59 @@
-import { isConfiguredLink, personalInfo } from "../data/portfolioData";
-import { Github, Linkedin, Facebook, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
+import { personalInfo } from "../data/portfolioData";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      const formatted = new Date().toLocaleTimeString("en-US", {
+        timeZone: "Asia/Dhaka",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      });
+      setTime(formatted);
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <footer className="bg-base-300/50 py-12 border-t border-base-content/10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-        <a
-          href="#home"
-          className="text-2xl font-bold text-base-content mb-4 transition-transform hover:scale-105"
-        >
-          Tauhid.
-        </a>
-
-        <p className="text-secondary text-center max-w-sm mb-8 text-sm leading-relaxed">
-          Building digital products, brands, and experiences with a focus on
-          modern design and user experience.
-        </p>
-
-        <div className="flex space-x-6 mb-10">
-          <a
-            href={personalInfo.socials.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full flex items-center justify-center bg-base-200 text-base-content hover:bg-primary hover:text-primary-content transition-all"
-            aria-label="GitHub"
-          >
-            <Github size={18} />
-          </a>
-          {isConfiguredLink(personalInfo.socials.linkedin) && (
-            <a
-              href={personalInfo.socials.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full flex items-center justify-center bg-base-200 text-base-content hover:bg-[#0077b5] hover:text-white transition-all"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={18} />
-            </a>
-          )}
-          {isConfiguredLink(personalInfo.socials.facebook) && (
-            <a
-              href={personalInfo.socials.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full flex items-center justify-center bg-base-200 text-base-content hover:bg-[#1877f2] hover:text-white transition-all"
-              aria-label="Facebook"
-            >
-              <Facebook size={18} />
-            </a>
-          )}
-          <a
-            href={`mailto:${personalInfo.email}`}
-            className="w-10 h-10 rounded-full flex items-center justify-center bg-base-200 text-base-content hover:bg-error hover:text-white transition-all"
-            aria-label="Email"
-          >
-            <Mail size={18} />
-          </a>
-        </div>
-
-        <div className="text-center text-xs font-medium text-secondary">
-          <p>
-            © {currentYear} {personalInfo.name}. All rights reserved.
+    <footer className="border-t border-outline-variant/10 py-12 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest transition-all duration-300">
+      <div className="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+        <div>
+          <div className="font-label-mono text-label-mono text-primary uppercase tracking-widest mb-3 font-bold">
+            Asif Shahriar Tauhid
+          </div>
+          <p className="font-body-md text-sm text-on-surface-variant max-w-md leading-relaxed">
+            Designing & engineering web systems with absolute precision, performance, and responsive architecture.
           </p>
         </div>
+
+        {/* Technical metadata table */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 font-label-mono text-xs text-on-surface-variant">
+          <div>
+            <span className="text-primary block mb-1 uppercase tracking-wider">LOC //</span>
+            <span className="text-on-surface font-medium">DHAKA, BGD</span>
+          </div>
+          <div>
+            <span className="text-primary block mb-1 uppercase tracking-wider">TIME //</span>
+            <span className="text-on-surface font-medium">{time} (GMT+6)</span>
+          </div>
+          <div>
+            <span className="text-primary block mb-1 uppercase tracking-wider">STACK //</span>
+            <span className="text-on-surface font-medium">PERN</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-container-max mx-auto border-t border-outline-variant/10 mt-12 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs font-label-mono text-on-surface-variant gap-4">
+        <span>© {currentYear} {personalInfo.name}. All rights reserved.</span>
+        <span className="uppercase tracking-widest text-primary/80">DESIGNED & CODED BY TAUHID</span>
       </div>
     </footer>
   );

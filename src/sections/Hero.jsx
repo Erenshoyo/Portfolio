@@ -4,155 +4,156 @@ import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { isConfiguredLink, personalInfo } from "../data/portfolioData";
 
 export default function Hero() {
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    const { clientX, clientY, currentTarget } = e;
+    const rect = currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: clientX - rect.left,
+      y: clientY - rect.top,
+    });
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center pt-24 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+      className="relative min-h-screen flex items-center pt-24 pb-16 px-margin-mobile md:px-margin-desktop overflow-hidden group"
     >
-      <div className="container mx-auto z-10 w-full max-w-6xl">
-        <div className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-8">
-          {/* Left Column (Text Content) */}
+      {/* Structural backgrounds */}
+      <div className="absolute inset-0 technical-grid pointer-events-none"></div>
+      <div className="absolute inset-0 grain-overlay pointer-events-none"></div>
+      
+      {/* Ambient mouse glow */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(195, 203, 154, 0.08), transparent 45%)`,
+        }}
+      ></div>
+
+      <div className="max-w-container-max mx-auto z-10 w-full flex flex-col justify-center">
+        {/* Coordinates and status row */}
+        <div className="w-full border-b border-outline-variant/15 pb-4 mb-12 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 font-label-mono text-xs text-on-surface-variant uppercase tracking-wider">
+          <span>LAT: 23.8103° N // LNG: 90.4125° E</span>
+          <span className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+            SYS_STATUS: OPERATIONAL // UPTIME: 99.98%
+          </span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center text-center">
+          {/* Centered Content */}
           <motion.div
-            className="flex-1 text-center md:text-left"
+            className="max-w-3xl w-full flex flex-col items-center"
             variants={containerVariants}
             initial="hidden"
-            animate={isImageLoaded ? "visible" : "hidden"}
+            animate="visible"
           >
-            {/* Minimalist Intro Tag */}
-            <motion.div variants={itemVariants} className="mb-6">
-              <span className="inline-block px-3 py-1 rounded-full bg-base-200 text-xs font-semibold tracking-widest text-primary uppercase">
-                Hello, I am
+            <motion.div variants={itemVariants} className="mb-4">
+              <span className="font-label-mono text-xs uppercase tracking-widest text-primary font-bold">
+                SYSTEM_INIT // PORTFOLIO_V1
               </span>
             </motion.div>
 
             {/* Headline */}
             <motion.div variants={itemVariants}>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-base-content mb-4 leading-tight">
-                {personalInfo.name}
+              <h1 className="font-display-lg text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-on-surface leading-[1.05] tracking-tight mb-4">
+                Md. Asif Shahriar <br />
+                <span className="font-display-lg italic font-normal text-primary">Tauhid</span>
               </h1>
             </motion.div>
 
-            {/* Subheadline Highlight */}
+            {/* Subheadline */}
             <motion.div variants={itemVariants}>
-              <h2 className="text-2xl md:text-3xl font-medium text-secondary mb-6">
+              <h2 className="font-headline-md text-lg sm:text-xl md:text-2xl text-secondary uppercase tracking-widest mb-6 font-semibold">
                 Software Engineer & Full-Stack Developer
               </h2>
             </motion.div>
 
-            {/* Intro Paragraph */}
+            {/* Brand statement */}
             <motion.p
               variants={itemVariants}
-              className="text-lg text-base-content/80 max-w-xl mx-auto md:mx-0 mb-10 leading-relaxed font-light mt-4"
+              className="font-body-md text-base sm:text-lg text-on-surface-variant max-w-2xl mb-10 leading-relaxed text-center mx-auto"
             >
               {personalInfo.brandStatement}
             </motion.p>
 
-            {/* CTAs */}
+            {/* Actions */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 mb-10"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mb-10 w-full max-w-md"
             >
               <a
-                href="/Asif%20Shahriar%20Tauhid_CVF.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn border-none bg-primary text-primary-content hover:bg-primary/90 btn-lg rounded-box font-medium w-full sm:w-auto"
+                href="#projects"
+                className="bg-primary text-background text-center px-8 py-3.5 font-ui-element text-sm uppercase tracking-wider font-semibold rounded hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
               >
-                View Resume <ArrowRight className="ml-2" size={18} />
+                Explore Systems <ArrowRight size={16} />
               </a>
 
               <a
                 href="https://wa.me/8801570234257"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-outline border-base-content/40 hover:bg-base-content/10 hover:border-base-content text-base-content btn-lg rounded-box font-medium w-full sm:w-auto"
+                className="border border-outline-variant text-on-surface text-center px-8 py-3.5 font-ui-element text-sm uppercase tracking-wider font-semibold rounded hover:bg-surface-container/50 transition-colors"
               >
                 Contact Now
               </a>
             </motion.div>
 
-            {/* Social Links Row */}
+            {/* Social Links */}
             <motion.div
               variants={itemVariants}
-              className="flex items-center justify-center md:justify-start gap-6 border-t border-base-200 pt-8 mt-4 w-fit"
+              className="flex items-center justify-center gap-4 border-t border-outline-variant/15 pt-6 mt-4 w-full max-w-xs"
             >
               <a
                 href={personalInfo.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-base-content/60 hover:text-primary transition-colors p-2"
+                className="text-on-surface-variant hover:text-primary transition-colors p-2 border border-outline-variant/15 rounded"
                 aria-label="GitHub"
               >
-                <Github size={22} />
+                <Github size={18} />
               </a>
               {isConfiguredLink(personalInfo.socials.linkedin) && (
                 <a
                   href={personalInfo.socials.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-base-content/60 hover:text-primary transition-colors p-2"
+                  className="text-on-surface-variant hover:text-primary transition-colors p-2 border border-outline-variant/15 rounded"
                   aria-label="LinkedIn"
                 >
-                  <Linkedin size={22} />
+                  <Linkedin size={18} />
                 </a>
               )}
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="text-base-content/60 hover:text-primary transition-colors p-2"
+                className="text-on-surface-variant hover:text-primary transition-colors p-2 border border-outline-variant/15 rounded"
                 aria-label="Email"
               >
-                <Mail size={22} />
+                <Mail size={18} />
               </a>
             </motion.div>
-          </motion.div>
-
-          {/* Right Column (Visual / Avatar) */}
-          <motion.div
-            className="flex-1 flex justify-center md:justify-end w-full"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isImageLoaded ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <div className="relative w-72 h-72 md:w-96 md:h-96">
-              {/* Outer decorative ring */}
-              <div className="absolute inset-[-10%] rounded-full border border-primary/20 animate-[spin_15s_linear_infinite]"></div>
-
-              {/* Avatar circle image */}
-              <div className="w-full h-full rounded-full bg-base-200 shadow-2xl overflow-hidden flex items-center justify-center relative border border-base-content/5 group">
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent pointer-events-none z-10 transition-opacity duration-500 group-hover:opacity-0"></div>
-                <img
-                  src="/profile.webp"
-                  alt={personalInfo.name}
-                  width="384"
-                  height="384"
-                  fetchPriority="high"
-                  decoding="async"
-                  onLoad={() => setIsImageLoaded(true)}
-                  className="w-full h-full object-cover object-center relative z-0 transition-all duration-700 ease-out group-hover:scale-105"
-                />
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>

@@ -14,63 +14,103 @@ export default function Skills() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    },
   };
 
-  return (
-    <section id="skills" className="py-24 relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Figma Lowercase Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
-          <h2 className="text-5xl font-bold text-base-content mb-4 lowercase tracking-tight">
-            skills.
-          </h2>
-          <div className="w-12 h-1 bg-primary mx-auto mb-6"></div>
-          <p className="text-secondary text-lg max-w-2xl mx-auto">
-            Technologies and tools I use to build modern web solutions.
-          </p>
-        </motion.div>
+  // Pre-mapping classes for bento layout asymmetry
+  const getBentoClasses = (index) => {
+    switch (index) {
+      case 0:
+        return "col-span-12 md:col-span-7";
+      case 1:
+        return "col-span-12 md:col-span-5";
+      case 2:
+        return "col-span-12 md:col-span-5";
+      case 3:
+        return "col-span-12 md:col-span-7";
+      case 4:
+        return "col-span-12";
+      default:
+        return "col-span-12";
+    }
+  };
 
+  const categoryLabels = [
+    "01 / CORE_ENGINE",
+    "02 / RUNTIME_SYSTEM",
+    "03 / PRESENTATION_LAYER",
+    "04 / BUILD_PIPELINE",
+    "05 / NEXT_STACK_RESEARCH",
+  ];
+
+  return (
+    <section id="skills" className="py-section-gap relative overflow-hidden border-t border-outline-variant/10">
+      <div className="absolute inset-0 technical-grid pointer-events-none opacity-50"></div>
+      
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        {/* Section Heading */}
+        <div className="mb-16">
+          <div className="font-label-mono text-xs text-primary uppercase tracking-widest mb-3 font-bold">
+            02 // TECHNICAL_ARSENAL
+          </div>
+          <h2 className="font-display-lg text-4xl sm:text-5xl text-on-surface leading-tight">
+            Engineered Capabilities & <span className="font-display-lg italic font-normal text-primary">Tooling</span>
+          </h2>
+          <p className="font-body-md text-sm sm:text-base text-on-surface-variant max-w-xl mt-4 leading-relaxed">
+            A precise mapping of my technological competencies, structural libraries, and ongoing systems development research.
+          </p>
+        </div>
+
+        {/* Bento Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto"
+          className="grid grid-cols-12 gap-gutter"
         >
           {skillsData.map((category, idx) => (
             <motion.div
               key={idx}
               variants={itemVariants}
-              className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] bg-base-200 p-8 rounded-box border border-base-content/5 hover:border-primary/20 transition-all hover:-translate-y-1 text-center flex flex-col items-center"
+              className={`${getBentoClasses(idx)} border border-outline-variant/15 p-6 sm:p-8 rounded bg-surface-container-low/40 relative flex flex-col justify-between overflow-hidden group/card transition-colors duration-300 hover:border-primary/20 hover:bg-surface-container-low/60`}
             >
-              <div className="flex items-center justify-center mb-6 pb-4 border-b border-base-content/10 w-full">
-                <div className="w-2 h-2 rounded-full bg-primary mr-3"></div>
-                <h3 className="text-xl font-semibold text-base-content tracking-wide">
+              {/* Corner Accents */}
+              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-outline-variant/30 group-hover/card:border-primary/50 transition-colors"></div>
+              <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-outline-variant/30 group-hover/card:border-primary/50 transition-colors"></div>
+              <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-outline-variant/30 group-hover/card:border-primary/50 transition-colors"></div>
+              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-outline-variant/30 group-hover/card:border-primary/50 transition-colors"></div>
+
+              <div>
+                {/* Tech Label */}
+                <div className="font-label-mono text-[10px] text-on-surface-variant/60 tracking-wider mb-6 flex justify-between items-center">
+                  <span>{categoryLabels[idx]}</span>
+                  <span className="w-1.5 h-1.5 bg-outline-variant/40 rounded-full group-hover/card:bg-primary transition-colors"></span>
+                </div>
+
+                {/* Category Title */}
+                <h3 className="font-headline-md text-lg sm:text-xl text-on-surface uppercase tracking-wider mb-4 font-semibold">
                   {category.category}
                 </h3>
               </div>
 
-              <ul className="flex flex-wrap justify-center gap-4 w-full">
+              {/* Skills Sub-list */}
+              <ul className="flex flex-wrap gap-3 mt-6">
                 {category.items.map((skill, sIdx) => {
                   const Icon = skill.icon;
                   return (
                     <li
                       key={sIdx}
-                      className="w-[calc(50%-0.5rem)] max-w-[180px] flex flex-col items-center justify-center p-3 rounded-lg bg-base-100/50 border border-base-content/5 group hover:bg-base-100 transition-colors"
+                      className="font-label-mono text-xs border border-outline-variant/15 px-3.5 py-1.5 rounded bg-surface-container-lowest/80 text-on-surface-variant hover:text-primary hover:border-primary transition-all duration-300 flex items-center gap-2"
                     >
-                      <div className="text-secondary mb-2 group-hover:text-primary transition-colors">
-                        <Icon size={24} strokeWidth={1.5} />
-                      </div>
-                      <span className="text-sm font-medium text-base-content/70 group-hover:text-base-content text-center transition-colors">
-                        {skill.name}
+                      <span className="opacity-70 group-hover/card:opacity-100">
+                        <Icon size={14} />
                       </span>
+                      <span>{skill.name}</span>
                     </li>
                   );
                 })}

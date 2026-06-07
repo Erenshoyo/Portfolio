@@ -3,127 +3,180 @@ import { projectsData } from "../data/portfolioData";
 import { ExternalLink, Github } from "lucide-react";
 
 export default function Projects() {
-  return (
-    <section id="projects" className="py-24 relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
-          <h2 className="text-5xl font-bold text-base-content mb-4 lowercase tracking-tight">
-            projects.
-          </h2>
-          <div className="w-12 h-1 bg-primary mx-auto mb-6"></div>
-          <p className="text-secondary text-lg max-w-2xl mx-auto">
-            A selection of my recent frontend work and side projects.
-          </p>
-        </motion.div>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {projectsData.map((project, index) => (
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
+  return (
+    <section
+      id="projects"
+      className="py-section-gap relative overflow-hidden border-t border-outline-variant/10"
+    >
+      <div className="absolute inset-0 technical-grid pointer-events-none opacity-40"></div>
+
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        {/* Section Heading */}
+        <div className="mb-16">
+          <div className="font-label-mono text-xs text-primary uppercase tracking-widest mb-3 font-bold">
+            05 // SELECTED_DEPLOYMENTS
+          </div>
+          <h2 className="font-display-lg text-4xl sm:text-5xl text-on-surface leading-tight">
+            Systems & Platforms Coded <br />
+            at{" "}
+            <span className="font-display-lg italic font-normal text-primary">
+              Scale
+            </span>
+          </h2>
+          <p className="font-body-md text-sm sm:text-base text-on-surface-variant max-w-xl mt-4 leading-relaxed">
+            An archive of verified, compiled, and deployed applications
+            incorporating modern design systems and efficient states.
+          </p>
+        </div>
+
+        {/* Projects Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter"
+        >
+          {projectsData.map((project) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
-              className="group bg-base-200 rounded-box border border-base-content/5 hover:border-primary/30 transition-all flex flex-col h-full overflow-hidden shadow-lg"
+              variants={itemVariants}
+              className="group border border-outline-variant/15 p-6 rounded bg-surface-container-low/30 relative flex flex-col justify-between overflow-hidden hover:border-primary/20 hover:bg-surface-container-low/50 transition-all duration-300"
             >
-              {/* Project Image */}
-              <div className="h-48 w-full bg-base-300 relative overflow-hidden flex items-center justify-center group-hover:bg-base-200 transition-colors">
-                <div className="absolute inset-0 bg-gradient-to-t from-base-200 to-transparent z-10 opacity-60"></div>
-                
-                {project.image ? (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                ) : (
-                  <div className="text-base-content/20 group-hover:scale-110 transition-transform duration-700">
-                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                      <polyline points="21 15 16 10 5 21"></polyline>
-                    </svg>
-                  </div>
-                )}
+              {/* Corner Accents */}
+              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-outline-variant/30 group-hover:border-primary/50 transition-colors"></div>
+              <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-outline-variant/30 group-hover:border-primary/50 transition-colors"></div>
+              <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-outline-variant/30 group-hover:border-primary/50 transition-colors"></div>
+              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-outline-variant/30 group-hover:border-primary/50 transition-colors"></div>
 
-                {project.status === "in-progress" && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 + 0.3 }}
-                    className="absolute top-4 right-4 z-30 flex items-center gap-1.5 px-3 py-1 rounded-full bg-base-100/80 backdrop-blur-md border border-primary/20 shadow-sm"
-                  >
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              <div>
+                {/* Tech Label / ID */}
+                <div className="font-label-mono text-[10px] text-on-surface-variant/60 tracking-wider mb-4 flex justify-between items-center">
+                  <span>LOG_ID // 0{project.id}_SYS</span>
+                  {project.status === "in-progress" ? (
+                    <span className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-primary/10 border border-primary/20 text-[9px] text-primary uppercase font-bold tracking-widest">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+                      ONGOING
                     </span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
-                      In Progress
+                  ) : (
+                    <span className="text-[9px] border border-outline-variant/20 px-2 py-0.5 rounded text-on-surface-variant/60 tracking-widest uppercase font-bold bg-surface-container-lowest">
+                      DEPLOYED
                     </span>
-                  </motion.div>
-                )}
-              </div>
-
-              <div className="p-6 flex-grow flex flex-col relative z-20">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-bold text-base-content group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                  <div className="flex gap-3">
-                    <a
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-secondary hover:text-base-content transition-colors"
-                      aria-label="GitHub Repository"
-                    >
-                      <Github size={20} />
-                    </a>
-                    <a
-                      href={project.liveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-secondary hover:text-primary transition-colors"
-                      aria-label="Live Demo"
-                    >
-                      <ExternalLink size={20} />
-                    </a>
-                  </div>
+                  )}
                 </div>
 
-                <p className="text-secondary text-sm leading-relaxed mb-6 flex-grow">
+                {/* Project Image */}
+                <div className="border border-outline-variant/10 rounded overflow-hidden aspect-[16/10] bg-surface-container-lowest filter grayscale group-hover:grayscale-0 transition-all duration-500 mb-6 relative">
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-outline-variant/40">
+                      <svg
+                        width="40"
+                        height="40"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <rect
+                          x="3"
+                          y="3"
+                          width="18"
+                          height="18"
+                          rx="2"
+                          ry="2"
+                        ></rect>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                      </svg>
+                    </div>
+                  )}
+                </div>
+
+                {/* Title */}
+                <h3 className="font-headline-md text-lg sm:text-xl text-on-surface uppercase tracking-wider mb-3 font-semibold group-hover:text-primary transition-colors">
+                  {project.title}
+                </h3>
+
+                {/* Description */}
+                <p className="font-body-md text-sm text-on-surface-variant leading-relaxed mb-6">
                   {project.description}
                 </p>
+              </div>
 
-                <div className="mt-auto pt-4 border-t border-base-content/10">
-                  <ul className="flex flex-wrap gap-2 text-xs font-medium text-base-content/80">
+              <div>
+                {/* Tech Badges */}
+                <div className="border-t border-outline-variant/10 pt-4 mb-6">
+                  <ul className="flex flex-wrap gap-2">
                     {project.techStack.map((tech, i) => (
-                      <li key={i} className="px-2 py-1 bg-base-100 rounded-md border border-base-content/5">{tech}</li>
+                      <li
+                        key={i}
+                        className="font-label-mono text-[10px] border border-outline-variant/15 px-2 py-0.5 rounded bg-surface-container-lowest/80 text-on-surface-variant"
+                      >
+                        {tech}
+                      </li>
                     ))}
                   </ul>
+                </div>
+
+                {/* Links */}
+                <div className="flex gap-4">
+                  <a
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 font-ui-element text-xs uppercase tracking-wider font-semibold border border-outline-variant text-on-surface text-center py-2.5 rounded hover:bg-surface-container/50 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <Github size={14} /> Repository
+                  </a>
+                  <a
+                    href={project.liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 font-ui-element text-xs uppercase tracking-wider font-semibold bg-primary text-background text-center py-2.5 rounded hover:opacity-95 transition-opacity flex items-center justify-center gap-2"
+                  >
+                    <ExternalLink size={14} /> Live System
+                  </a>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
-        
+        </motion.div>
+
+        {/* View More Callout */}
         <div className="mt-16 text-center">
           <a
             href="https://github.com/Erenshoyo"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-outline border-base-content/40 hover:bg-base-content/10 hover:border-base-content text-base-content btn-wide rounded-box"
+            className="inline-block border border-outline-variant text-on-surface text-center px-12 py-3.5 font-ui-element text-sm uppercase tracking-wider font-semibold rounded hover:bg-surface-container/50 transition-colors"
           >
-            View More on GitHub
+            Visit Github
           </a>
         </div>
       </div>

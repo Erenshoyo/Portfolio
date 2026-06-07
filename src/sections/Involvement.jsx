@@ -1,68 +1,73 @@
 import { motion } from "framer-motion";
 import { involvementData } from "../data/portfolioData";
-import { Rocket } from "lucide-react";
 
 export default function Involvement() {
   return (
-    <section id="involvement" className="py-24 relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-12">
-          
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="md:w-1/3"
-          >
-            <h2 className="text-5xl font-bold text-base-content mb-6 lowercase tracking-tight">
-              involvement.
-            </h2>
-            <div className="w-12 h-1 bg-primary mb-6"></div>
-            <p className="text-secondary text-lg">
-              Community building, continuous learning, and hands-on frontend development.
-            </p>
-          </motion.div>
+    <section id="involvement" className="py-section-gap relative overflow-hidden border-t border-outline-variant/10">
+      <div className="absolute inset-0 technical-grid pointer-events-none opacity-40"></div>
+      
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        <div className="flex flex-col lg:flex-row gap-12">
+          {/* Left Column: Heading */}
+          <div className="lg:w-1/3">
+            <div className="sticky top-24">
+              <div className="font-label-mono text-xs text-primary uppercase tracking-widest mb-3 font-bold">
+                03 // PROFESSIONAL_LOG
+              </div>
+              <h2 className="font-display-lg text-4xl sm:text-5xl text-on-surface leading-tight">
+                Systems & Community <span className="font-display-lg italic font-normal text-primary">Involvement</span>
+              </h2>
+              <p className="font-body-md text-sm sm:text-base text-on-surface-variant mt-4 leading-relaxed">
+                Chronological ledger of professional contributions, open-source initiatives, and technological community service.
+              </p>
+            </div>
+          </div>
 
-          {/* Timeline List */}
-          <div className="md:w-2/3">
-            <div className="space-y-8">
+          {/* Right Column: Timeline */}
+          <div className="lg:w-2/3">
+            <div className="relative pl-6 sm:pl-8 border-l border-outline-variant/20 space-y-12">
               {involvementData.map((item, index) => (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-base-200 p-8 rounded-box shadow-lg border border-base-content/5 hover:border-primary/20 transition-all flex flex-col sm:flex-row gap-6 relative"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative group"
                 >
-                  {/* Icon Column */}
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-12 h-12 rounded-full bg-base-100 flex items-center justify-center text-primary border border-base-content/10">
-                      <Rocket size={20} />
-                    </div>
+                  {/* Timeline node/indicator */}
+                  <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 bg-background border-2 border-outline-variant group-hover:border-primary transition-colors rounded-full flex items-center justify-center">
+                    <div className="w-1.5 h-1.5 bg-outline-variant group-hover:bg-primary transition-colors rounded-full"></div>
                   </div>
 
-                  {/* Content Column */}
-                  <div className="flex-grow">
-                    <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-2 gap-2">
-                      <h3 className="text-xl font-bold text-base-content">
-                        {item.role}
-                      </h3>
-                      <span className="inline-block px-3 py-1 rounded-full bg-base-100/50 text-xs font-semibold text-secondary tracking-wider whitespace-nowrap border border-base-content/5 border-dashed">
+                  <div className="border border-outline-variant/15 p-6 sm:p-8 rounded bg-surface-container-low/30 relative overflow-hidden group-hover:border-outline-variant/30 transition-colors">
+                    {/* Corner details */}
+                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-outline-variant/30 group-hover:border-primary/50 transition-colors"></div>
+                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-outline-variant/30 group-hover:border-primary/50 transition-colors"></div>
+
+                    {/* Metadata Header */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                      <span className="font-label-mono text-xs text-primary uppercase tracking-wider">
                         {item.duration}
                       </span>
+                      <span className="font-label-mono text-[10px] text-on-surface-variant/60 uppercase tracking-widest">
+                        LOG_ID: 0{item.id}_RUN
+                      </span>
                     </div>
-                    
-                    <h4 className="text-primary font-medium mb-4 text-sm uppercase tracking-widest">
+
+                    {/* Roles */}
+                    <h3 className="font-headline-md text-lg sm:text-xl text-on-surface uppercase tracking-wider mb-1 font-semibold">
+                      {item.role}
+                    </h3>
+                    <h4 className="font-label-mono text-sm text-secondary uppercase tracking-widest mb-6">
                       {item.organization}
                     </h4>
-                    
-                    <ul className="space-y-3">
+
+                    {/* Bullet Points */}
+                    <ul className="space-y-3 font-body-md text-sm sm:text-base text-on-surface-variant leading-relaxed">
                       {item.points.map((point, i) => (
-                        <li key={i} className="text-base-content/80 text-sm md:text-base flex items-start leading-relaxed">
-                          <span className="w-1.5 h-1.5 rounded-full bg-secondary mt-2 mr-3 flex-shrink-0"></span>
+                        <li key={i} className="flex items-start gap-3">
+                          <span className="text-primary mt-1 select-none font-bold">//</span>
                           <span>{point}</span>
                         </li>
                       ))}
@@ -72,7 +77,6 @@ export default function Involvement() {
               ))}
             </div>
           </div>
-          
         </div>
       </div>
     </section>

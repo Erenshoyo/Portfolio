@@ -1,69 +1,70 @@
 import { motion } from "framer-motion";
 import { educationData } from "../data/portfolioData";
-import { GraduationCap } from "lucide-react";
 
 export default function Education() {
   return (
-    <section id="education" className="py-24 relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row-reverse gap-12">
-          
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="md:w-1/3 md:text-right flex flex-col md:items-end"
-          >
-            <h2 className="text-5xl font-bold text-base-content mb-6 lowercase tracking-tight">
-              education.
-            </h2>
-            <div className="w-12 h-1 bg-primary mb-6"></div>
-            <p className="text-secondary text-lg">
-              Academic background and formal education in computer science.
-            </p>
-          </motion.div>
+    <section id="education" className="py-section-gap relative overflow-hidden border-t border-outline-variant/10">
+      <div className="absolute inset-0 technical-grid pointer-events-none opacity-40"></div>
+      
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        <div className="flex flex-col lg:flex-row gap-12">
+          {/* Left Column: Heading */}
+          <div className="lg:w-1/3">
+            <div className="sticky top-24">
+              <div className="font-label-mono text-xs text-primary uppercase tracking-widest mb-3 font-bold">
+                04 // ACADEMIC_LOG
+              </div>
+              <h2 className="font-display-lg text-4xl sm:text-5xl text-on-surface leading-tight">
+                Educational <span className="font-display-lg italic font-normal text-primary">Foundations</span>
+              </h2>
+              <p className="font-body-md text-sm sm:text-base text-on-surface-variant mt-4 leading-relaxed">
+                Academic trajectory, specialized courses, and theoretical computer science research.
+              </p>
+            </div>
+          </div>
 
-          {/* Timeline List */}
-          <div className="md:w-2/3">
-            <div className="space-y-8">
+          {/* Right Column: Cards */}
+          <div className="lg:w-2/3">
+            <div className="space-y-6">
               {educationData.map((item, index) => (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-base-200 p-8 rounded-box shadow-lg border border-base-content/5 hover:border-primary/20 transition-all flex flex-col sm:flex-row gap-6 relative"
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative group border border-outline-variant/15 p-6 sm:p-8 rounded bg-surface-container-low/30 overflow-hidden hover:border-outline-variant/30 transition-colors"
                 >
-                  {/* Icon Column */}
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-12 h-12 rounded-full bg-base-100 flex items-center justify-center text-primary border border-base-content/10">
-                      <GraduationCap size={20} />
-                    </div>
-                  </div>
+                  {/* Corner accents */}
+                  <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-outline-variant/30 group-hover:border-primary/50 transition-colors"></div>
+                  <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-outline-variant/30 group-hover:border-primary/50 transition-colors"></div>
 
-                  {/* Content Column */}
-                  <div className="flex-grow">
-                    <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-2 gap-2">
-                      <h3 className="text-xl font-bold text-base-content pr-4">
-                        {item.degree}
-                      </h3>
-                      <span className="inline-block px-3 py-1 rounded-full bg-base-100/50 text-xs font-semibold text-secondary tracking-wider whitespace-nowrap border border-base-content/5 border-dashed">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                      {/* Timeline duration tag */}
+                      <span className="font-label-mono text-xs text-primary uppercase tracking-wider block mb-2">
                         {item.duration}
                       </span>
+                      
+                      {/* Degree Name */}
+                      <h3 className="font-headline-md text-lg sm:text-xl text-on-surface uppercase tracking-wider mb-2 font-semibold">
+                        {item.degree}
+                      </h3>
+
+                      {/* Institution */}
+                      <h4 className="font-label-mono text-sm text-secondary uppercase tracking-widest">
+                        {item.institution}
+                      </h4>
                     </div>
-                    
-                    <h4 className="text-primary font-medium text-sm uppercase tracking-widest mt-1">
-                      {item.institution}
-                    </h4>
+
+                    <div className="font-label-mono text-[10px] text-on-surface-variant/40 uppercase tracking-widest self-start sm:self-center">
+                      SYS_RECORD: 0{item.id}_EDU
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </div>
           </div>
-          
         </div>
       </div>
     </section>

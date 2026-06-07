@@ -46,7 +46,7 @@ export const navLinks = [
   { name: "Involvement", href: "#involvement" },
   { name: "Education", href: "#education" },
   { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
+  { name: "Blog", href: "#blog" },
 ];
 
 export const skillsData = [
@@ -194,5 +194,195 @@ export const projectsData = [
     featured: true,
     image: "/projects/phudu.png",
   },
-  
+];
+
+export const blogPostsData = [
+  {
+    id: "responsive-bento-grids",
+    title: "Architectural UI: Building Responsive Bento Grids with CSS & Framer Motion",
+    excerpt: "An in-depth look at implementing asymmetrical, container-based dashboard bento grids with micro-interactions, responsive sizing rules, and fluid animation entries.",
+    date: "June 05, 2026",
+    readTime: "5 min read",
+    tags: ["React", "CSS", "Design System"],
+    content: `
+# Architectural UI: Building Responsive Bento Grids with CSS & Framer Motion
+
+Modern interface designs have shifted away from standard repeating card grids toward more dynamic, asymmetric layouts. The **Bento Grid**—inspired by Japanese lunchboxes—is a primary design system element that helps group multi-dimensional information visually.
+
+In this deep dive, we'll explore how to build a responsive, production-ready Bento Grid using Tailwind CSS and animate its entry fluidly with Framer Motion.
+
+## 1. Structuring the Grid Layout
+
+To build a bento layout, we use CSS Grid. Tailwind makes this straightforward using the grid-cols class family. For desktop screens, a 12-column grid provides maximum flexibility for different column spans (e.g. col-span-7 and col-span-5).
+
+\`\`\`jsx
+<div className="grid grid-cols-12 gap-6">
+  {/* Card 1: Wide */}
+  <div className="col-span-12 md:col-span-7">...</div>
+  {/* Card 2: Narrow */}
+  <div className="col-span-12 md:col-span-5">...</div>
+</div>
+\`\`\`
+
+## 2. Setting Up Accent Lines & Border Anchors
+
+To achieve a premium, architectural look, we replace bulky dropshadows with clean line borders and accent anchors:
+
+*   Use \`border border-outline-variant/15\` to outline panels.
+*   Add absolute corner indicators that align with the grid cells.
+*   Use background grain overlays or radial dot gradients for technical surfaces.
+
+## 3. Animating Grid Entries with Framer Motion
+
+When rendering grids, animating them staggered makes the load experience feel incredibly premium. We define parent container variants and child item variants:
+
+\`\`\`javascript
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
+\`\`\`
+
+By applying these to \`motion.div\` elements, the layout slides into place naturally.
+    `
+  },
+  {
+    id: "dynamic-themes-pattern",
+    title: "The Dynamic Themes Pattern: Seamless Dark-to-Light Fades with Tailwind CSS Variables",
+    excerpt: "How to escape standard Tailwind utility-based theme classes and build an architecture that supports instant color-scheme transitions using CSS custom variables.",
+    date: "May 22, 2026",
+    readTime: "6 min read",
+    tags: ["Tailwind", "CSS", "Web Dev"],
+    content: `
+# The Dynamic Themes Pattern: Seamless Dark-to-Light Fades
+
+Usually, implementing a dark theme in Tailwind involves adding the \`dark:\` modifier to dozens of elements. However, this approach can quickly become verbose, hard to maintain, and does not support smooth theme transition fades.
+
+Instead, we can leverage CSS variables inside our Tailwind configuration file.
+
+## 1. Mapping Tailwind Colors to CSS Variables
+
+Inside \`tailwind.config.js\`, instead of hardcoding hex values, reference CSS custom variables:
+
+\`\`\`javascript
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: "var(--primary)",
+        background: "var(--background)",
+        "on-surface": "var(--on-surface)"
+      }
+    }
+  }
+}
+\`\`\`
+
+## 2. Defining Theme Blocks in index.css
+
+In your global stylesheet, define the actual hex values for both light and dark themes using HTML data attributes:
+
+\`\`\`css
+:root[data-theme="figmaDark"] {
+  --primary: #c3cb9a;
+  --background: #14140d;
+  --on-surface: #e6e2d7;
+}
+
+:root[data-theme="figmaLight"] {
+  --primary: #5A633F;
+  --background: #FAFAF6;
+  --on-surface: #202514;
+}
+\`\`\`
+
+## 3. Adding Smooth Fading Transitions
+
+To toggle the theme smoothly, we apply a transition to base structural elements. Avoid using a universal \`*\` selector as it can cause performance lags or break layout animations. Instead, target base tags:
+
+\`\`\`css
+html, body, header, footer, section, div, button, a {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+\`\`\`
+
+This approach decouples your style utilities from the active theme and makes switching themes look elegant.
+    `
+  },
+  {
+    id: "offline-first-persistence",
+    title: "Offline-First Design: Architecting local persistence systems for modern SPAs",
+    excerpt: "Structuring local storage caching, state synchronization hooks, and error handling fallback systems for offline performance and high-reliability data persistence.",
+    date: "April 18, 2026",
+    readTime: "8 min read",
+    tags: ["Architecture", "React", "State"],
+    content: `
+# Offline-First Design: Architecting local persistence systems
+
+In a world reliant on network availability, building interfaces that work offline is crucial for user experience. An offline-first Single Page Application ensures data remains accessible even with spotty connectivity.
+
+Let's discuss how to sync states to the client local storage securely.
+
+## 1. Creating a Sync Hook
+
+We can build a custom state synchronization hook that handles read/write fallbacks:
+
+\`\`\`javascript
+import { useState, useEffect } from 'react';
+
+export function usePersistedState(key, defaultValue) {
+  const [state, setState] = useState(() => {
+    try {
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : defaultValue;
+    } catch (error) {
+      console.warn("Storage read error:", error);
+      return defaultValue;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(key, JSON.stringify(state));
+    } catch (error) {
+      console.warn("Storage write error:", error);
+    }
+  }, [key, state]);
+
+  return [state, setState];
+}
+\`\`\`
+
+## 2. Managing UI Offline Indicators
+
+To inform users about sync updates, we can monitor the browser connection state:
+
+\`\`\`javascript
+const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+useEffect(() => {
+  const goOnline = () => setIsOnline(true);
+  const goOffline = () => setIsOnline(false);
+
+  window.addEventListener('online', goOnline);
+  window.addEventListener('offline', goOffline);
+
+  return () => {
+    window.removeEventListener('online', goOnline);
+    window.removeEventListener('offline', goOffline);
+  };
+}, []);
+\`\`\`
+
+By combining persistent state and offline handlers, we create reliable, native-feeling web applications.
+    `
+  }
 ];

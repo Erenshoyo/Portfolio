@@ -33,170 +33,177 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
-          <h2 className="text-5xl font-bold text-base-content mb-4 lowercase tracking-tight">
-            contact.
+    <section id="contact" className="py-section-gap relative overflow-hidden border-t border-outline-variant/10">
+      <div className="absolute inset-0 technical-grid pointer-events-none opacity-40"></div>
+      
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        {/* Section Heading */}
+        <div className="mb-16 text-center">
+          <div className="font-label-mono text-xs text-primary uppercase tracking-widest mb-3 font-bold">
+            06 // CONTACT_SYSTEM
+          </div>
+          <h2 className="font-display-lg text-4xl sm:text-5xl text-on-surface leading-tight">
+            Initiate <span className="font-display-lg italic font-normal text-primary">Communication</span>
           </h2>
-          <div className="w-12 h-1 bg-primary mx-auto mb-6"></div>
-          <p className="text-secondary text-lg max-w-2xl mx-auto">
-            I'm currently available for freelance work and open to new
-            opportunities.
+          <p className="font-body-md text-sm sm:text-base text-on-surface-variant max-w-xl mx-auto mt-4 leading-relaxed">
+            Reach out via the system dispatch form below or choose an alternative connection protocol.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          {/* Contact Info */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter max-w-5xl mx-auto">
+          {/* Contact Info Card */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-base-200 p-8 rounded-box shadow-lg border border-base-content/5 h-full">
-              <h3 className="text-2xl font-bold mb-8 text-base-content">
-                Get in touch
-              </h3>
+            <div className="border border-outline-variant/15 p-6 sm:p-8 rounded bg-surface-container-low/30 h-full relative overflow-hidden flex flex-col justify-between">
+              {/* Corner Accents */}
+              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-outline-variant/30"></div>
+              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-outline-variant/30"></div>
 
-              <div className="space-y-6 flex flex-col items-start justify-center">
-                <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="w-full flex items-center p-5 rounded-box bg-base-100/50 border border-base-content/5 hover:border-primary/30 transition-colors group"
-                >
-                  <div className="w-14 h-14 bg-base-300 text-primary rounded-full flex items-center justify-center mr-5 group-hover:scale-110 transition-transform">
-                    <Mail size={24} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-secondary font-medium tracking-wide uppercase">
-                      Email Me
-                    </p>
-                    <p className="text-lg font-medium text-base-content mt-1">
-                      {personalInfo.email}
-                    </p>
-                  </div>
-                </a>
+              <div>
+                <h3 className="font-headline-md text-lg sm:text-xl text-on-surface uppercase tracking-wider mb-8 font-semibold">
+                  Connection Protocols
+                </h3>
 
-                {isConfiguredLink(personalInfo.calendarForm) ? (
+                <div className="space-y-4 flex flex-col items-start justify-center">
                   <a
-                    href={personalInfo.calendarForm}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full flex items-center p-5 rounded-box bg-base-100/50 border border-base-content/5 hover:border-primary/30 transition-colors group"
+                    href={`mailto:${personalInfo.email}`}
+                    className="w-full flex items-center p-5 rounded border border-outline-variant/10 bg-surface-container-low/40 hover:border-primary/30 transition-all duration-300 group"
                   >
-                    <div className="w-14 h-14 bg-base-300 text-base-content rounded-full flex items-center justify-center mr-5 group-hover:scale-110 transition-transform">
-                      <Calendar size={24} />
+                    <div className="w-12 h-12 border border-outline-variant/20 text-primary rounded flex items-center justify-center mr-5 group-hover:bg-primary/5 transition-colors">
+                      <Mail size={18} />
                     </div>
                     <div>
-                      <p className="text-sm text-secondary font-medium tracking-wide uppercase">
-                        Book a Call
+                      <p className="font-label-mono text-[10px] text-on-surface-variant/60 uppercase tracking-widest">
+                        Email Mailbox
                       </p>
-                      <p className="text-lg font-medium text-base-content mt-1">
-                        Schedule Meeting
+                      <p className="font-body-md text-base text-on-surface mt-1 font-semibold">
+                        {personalInfo.email}
                       </p>
                     </div>
                   </a>
-                ) : (
-                  <div className="w-full flex items-center p-5 rounded-box bg-base-100/40 border border-dashed border-base-content/20">
-                    <div className="w-14 h-14 bg-base-300 text-base-content/70 rounded-full flex items-center justify-center mr-5">
-                      <Calendar size={24} />
+
+                  {isConfiguredLink(personalInfo.calendarForm) ? (
+                    <a
+                      href={personalInfo.calendarForm}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full flex items-center p-5 rounded border border-outline-variant/10 bg-surface-container-low/40 hover:border-primary/30 transition-all duration-300 group"
+                    >
+                      <div className="w-12 h-12 border border-outline-variant/20 text-on-surface rounded flex items-center justify-center mr-5 group-hover:bg-on-surface/5 transition-colors">
+                        <Calendar size={18} />
+                      </div>
+                      <div>
+                        <p className="font-label-mono text-[10px] text-on-surface-variant/60 uppercase tracking-widest">
+                          Synchronous Booking
+                        </p>
+                        <p className="font-body-md text-base text-on-surface mt-1 font-semibold">
+                          Schedule Live Meeting
+                        </p>
+                      </div>
+                    </a>
+                  ) : (
+                    <div className="w-full flex items-center p-5 rounded border border-dashed border-outline-variant/20 bg-surface-container-low/20">
+                      <div className="w-12 h-12 border border-dashed border-outline-variant/25 text-on-surface-variant/50 rounded flex items-center justify-center mr-5">
+                        <Calendar size={18} />
+                      </div>
+                      <div>
+                        <p className="font-label-mono text-[10px] text-on-surface-variant/40 uppercase tracking-widest">
+                          Synchronous Booking
+                        </p>
+                        <p className="font-body-md text-sm text-on-surface-variant/60 mt-1">
+                          Calendar booking coming soon
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm text-secondary font-medium tracking-wide uppercase">
-                        Book a Call
-                      </p>
-                      <p className="text-base font-medium text-base-content/80 mt-1">
-                        Calendar link coming soon
-                      </p>
-                    </div>
-                  </div>
-                )}
+                  )}
+                </div>
+              </div>
+
+              <div className="font-label-mono text-[9px] text-on-surface-variant/40 uppercase tracking-widest mt-8 border-t border-outline-variant/10 pt-4">
+                SECURE_CONNECTION // STABLE
               </div>
             </div>
           </motion.div>
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
             <form
               onSubmit={handleSubmit}
-              className="bg-base-200 p-8 rounded-box shadow-lg border border-base-content/5 h-full flex flex-col"
+              className="border border-outline-variant/15 p-6 sm:p-8 rounded bg-surface-container-low/30 h-full flex flex-col justify-between relative"
             >
-              <div className="form-control mb-5">
-                <label htmlFor="contact-name" className="label pb-2">
-                  <span className="label-text text-base-content font-medium">
-                    Name
-                  </span>
-                </label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Your Name"
-                  className="input input-lg input-bordered focus:border-primary focus:outline-none w-full bg-base-100 rounded-lg text-base"
-                  required
-                />
-              </div>
+              {/* Corner Accents */}
+              <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-outline-variant/30"></div>
+              <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-outline-variant/30"></div>
 
-              <div className="form-control mb-5">
-                <label htmlFor="contact-email" className="label pb-2">
-                  <span className="label-text text-base-content font-medium">
-                    Email
-                  </span>
-                </label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Your Email"
-                  className="input input-lg input-bordered focus:border-primary focus:outline-none w-full bg-base-100 rounded-lg text-base"
-                  required
-                />
-              </div>
+              <div>
+                <div className="mb-5">
+                  <label htmlFor="contact-name" className="block font-label-mono text-[10px] text-on-surface-variant uppercase tracking-wider mb-2">
+                    Sender Name
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Your Name"
+                    className="w-full bg-surface-container-lowest/50 border border-outline-variant/15 p-4 rounded text-on-surface placeholder:text-on-surface-variant/30 focus:outline-none focus:border-primary font-body-md text-base transition-colors"
+                    required
+                  />
+                </div>
 
-              <div className="form-control mb-8 flex-grow">
-                <label htmlFor="contact-message" className="label pb-2">
-                  <span className="label-text text-base-content font-medium">
-                    Message
-                  </span>
-                </label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="textarea textarea-bordered focus:border-primary focus:outline-none w-full h-full min-h-[150px] bg-base-100 rounded-lg text-base pt-4"
-                  placeholder="Write your message here..."
-                  required
-                ></textarea>
+                <div className="mb-5">
+                  <label htmlFor="contact-email" className="block font-label-mono text-[10px] text-on-surface-variant uppercase tracking-wider mb-2">
+                    Sender Email Protocol
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Your Email"
+                    className="w-full bg-surface-container-lowest/50 border border-outline-variant/15 p-4 rounded text-on-surface placeholder:text-on-surface-variant/30 focus:outline-none focus:border-primary font-body-md text-base transition-colors"
+                    required
+                  />
+                </div>
+
+                <div className="mb-6">
+                  <label htmlFor="contact-message" className="block font-label-mono text-[10px] text-on-surface-variant uppercase tracking-wider mb-2">
+                    Message Body
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="w-full bg-surface-container-lowest/50 border border-outline-variant/15 p-4 rounded text-on-surface placeholder:text-on-surface-variant/30 focus:outline-none focus:border-primary font-body-md text-base min-h-[120px] transition-colors"
+                    placeholder="Write your message here..."
+                    required
+                  ></textarea>
+                </div>
               </div>
 
               <button
                 type="submit"
-                className="btn btn-primary btn-lg rounded-box font-medium w-full text-primary-content"
+                className="w-full font-ui-element text-xs uppercase tracking-wider font-semibold bg-primary text-background py-3.5 rounded hover:opacity-95 transition-all duration-300 flex items-center justify-center gap-2"
               >
                 {isSuccess ? (
                   <>
-                    <CheckCircle size={20} className="mr-2" /> Email Draft
-                    Opened
+                    <CheckCircle size={14} /> Mail Client Launched
                   </>
                 ) : (
                   <>
-                    Open Email Draft <Send size={18} className="ml-2" />
+                    Dispatch Message <Send size={12} />
                   </>
                 )}
               </button>
