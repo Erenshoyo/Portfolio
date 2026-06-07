@@ -84,6 +84,13 @@ export default function Dashboard({ setView, projects, setProjects, blogs, setBl
   const seedDatabase = async () => {
     setIsLoading(true);
     try {
+      // Clear existing records to prevent duplication
+      const { error: clearProjErr } = await supabase.from("projects").delete().neq("id", 0);
+      if (clearProjErr) throw clearProjErr;
+      
+      const { error: clearBlogErr } = await supabase.from("blogs").delete().neq("id", "placeholder-id");
+      if (clearBlogErr) throw clearBlogErr;
+
       // Seed Projects
       const projectsToInsert = projectsData.map((p) => ({
         title: p.title,
