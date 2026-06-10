@@ -315,11 +315,11 @@ export default function Dashboard({ setView, projects, setProjects, blogs, setBl
   };
 
   return (
-    <div className="pt-24 pb-24 px-margin-mobile md:px-margin-desktop min-h-screen relative">
+    <div className="pt-24 pb-24 min-h-screen relative">
       <div className="absolute inset-0 technical-grid pointer-events-none opacity-20"></div>
       <div className="absolute inset-0 grain-overlay pointer-events-none"></div>
 
-      <div className="max-w-container-max mx-auto relative z-10">
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
         
         {/* Header Block */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-outline-variant/15 pb-6 mb-8 gap-4">

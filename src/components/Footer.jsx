@@ -23,8 +23,8 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="border-t border-outline-variant/10 py-12 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest transition-all duration-300">
-      <div className="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+    <footer className="border-t border-outline-variant/10 py-12 bg-surface-container-lowest transition-all duration-300">
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
         <div>
           <div className="font-label-mono text-label-mono text-primary uppercase tracking-widest mb-3 font-bold">
             Asif Shahriar Tauhid
@@ -51,7 +51,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="max-w-container-max mx-auto border-t border-outline-variant/10 mt-12 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs font-label-mono text-on-surface-variant gap-4">
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop border-t border-outline-variant/10 mt-12 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs font-label-mono text-on-surface-variant gap-4">
         <span>© {currentYear} {personalInfo.name}. All rights reserved.</span>
         <span className="uppercase tracking-widest text-primary/80">DESIGNED & CODED BY TAUHID</span>
       </div>

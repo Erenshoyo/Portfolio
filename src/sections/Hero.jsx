@@ -38,7 +38,7 @@ export default function Hero() {
     <section
       id="home"
       onMouseMove={handleMouseMove}
-      className="relative min-h-screen flex items-center pt-24 pb-16 px-margin-mobile md:px-margin-desktop overflow-hidden group"
+      className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden group"
     >
       {/* Structural backgrounds */}
       <div className="absolute inset-0 technical-grid pointer-events-none"></div>
@@ -52,7 +52,7 @@ export default function Hero() {
         }}
       ></div>
 
-      <div className="max-w-container-max mx-auto z-10 w-full flex flex-col justify-center">
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop z-10 w-full flex flex-col justify-center">
         {/* Coordinates and status row */}
         <div className="w-full border-b border-outline-variant/15 pb-4 mb-12 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 font-label-mono text-xs text-on-surface-variant uppercase tracking-wider">
           <span>LAT: 23.8103° N // LNG: 90.4125° E</span>

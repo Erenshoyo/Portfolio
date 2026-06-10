@@ -192,11 +192,11 @@ export default function BlogPostReader({ blogs, activePostId, setView }) {
   };
 
   return (
-    <div className="pt-28 pb-24 px-margin-mobile md:px-margin-desktop min-h-screen relative">
+    <div className="pt-28 pb-24 min-h-screen relative">
       <div className="absolute inset-0 technical-grid pointer-events-none opacity-20"></div>
       <div className="absolute inset-0 grain-overlay pointer-events-none"></div>
 
-      <div className="max-w-3xl mx-auto relative z-10">
+      <div className="max-w-3xl mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
         {/* Navigation Breadcrumb */}
         <button
           onClick={() => setView("blog")}

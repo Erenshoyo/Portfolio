@@ -36,8 +36,8 @@ export default function BlogPreview({ blogs, setView, setActivePostId }) {
   };
 
   return (
-    <section id="blog" className="py-24 px-margin-mobile md:px-margin-desktop border-t border-outline-variant/15 relative">
-      <div className="max-w-container-max mx-auto relative z-10">
+    <section id="blog" className="py-24 border-t border-outline-variant/15 relative">
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
         
         {/* Section Header */}
         <div className="mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
